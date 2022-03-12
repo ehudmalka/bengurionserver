@@ -10,3 +10,7 @@ def search():
     resp = flask.Response(request.args.get('a') + request.args.get('b'))
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
+
+@app.route('/register', methods=['GET'])
+def register():
+    return "success"
