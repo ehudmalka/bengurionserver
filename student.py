@@ -6,8 +6,6 @@ class Student(db.Model): #inherit from db.Model to connect to the database
     age = db.Column(db.Integer, nullable=False) #mark the age as an integer column
     def display(self):
         print(self.name,self.age)
-    def __repr__(self):
-        return "<Student name='%s' age=%x>" % (self.name, self.age)
 
 '''
 Comment this to avoid running this (because we import this file)

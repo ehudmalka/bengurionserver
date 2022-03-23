@@ -14,10 +14,7 @@ def search():
     #lets say this function will search by name (just to test the db)
     name = request.args.get("name")
     st = Student.query.filter_by(name=name).all() #get all students with the given name, this is the syntax
-    respStr = ""
-    for s in st:
-        respStr += s.__repr__() + ','
-    resp = flask.Response(respStr)
+    resp = flask.Response(st)
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
