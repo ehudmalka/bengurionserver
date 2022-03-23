@@ -14,15 +14,18 @@ def search():
     #lets say this function will search by name (just to test the db)
     name = request.args.get("name")
     st = Student.query.filter_by(name=name).all() #get all students with the given name, this is the syntax
-    resp = flask.Response(str(st))
+    respStr = ""
+    for s in st:
+        respStr += s.__repr__() + ','
+    resp = flask.Response(respStr)
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
 @app.route('/register', methods=['GET'])
 def register():
-    name = request.args.get("name")
-    age = request.args.get("age")
-    st = Student(name=name, age=age) #no need to create an id, sqlite does it to us automatically
+    studentName = request.args.get("name")
+    studentAge = request.args.get("age")
+    st = Student(name=studentName, age=studentAge) #no need to create an id, sqlite does it to us automatically
     db.session.add(st) #add the student to the database (will automatically add it to specifically the student table)
     db.session.commit() #commit the changes, needed after every change to actually save it in the database
     return "success"
