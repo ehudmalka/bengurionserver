@@ -1,4 +1,5 @@
 from main import db #import the db from main.py in order to use it here
+import json
 
 class Student(db.Model): #inherit from db.Model to connect to the database
     id = db.Column('id', db.Integer, primary_key=True, autoincrement=True) #create an id column. each row in the database needs unique id, mark its as primary key since this is the id the database will use
@@ -6,6 +7,8 @@ class Student(db.Model): #inherit from db.Model to connect to the database
     age = db.Column(db.Integer, nullable=False) #mark the age as an integer column
     def display(self):
         print(self.name,self.age)
+    def toDictionary(self):
+        return {"id": self.id, "name": self.name, "age": self.age}
 
 '''
 Comment this to avoid running this (because we import this file)
